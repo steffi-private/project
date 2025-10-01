@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanban Board</title>
+  <style>
+    body {
+      width: 300px;
+      padding: 20px;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    
+    .popup-container {
+      text-align: center;
+    }
+    
+    .logo {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 16px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    
+    h1 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    
+    p {
+      margin: 0 0 20px;
+      opacity: 0.9;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    
+    .open-button {
+      width: 100%;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .open-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+    }
+    
+    .stats {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 12px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="popup-container">
+    <div class="logo">📋</div>
+    <h1>Kanban Board</h1>
+    <p>Organize your tasks and track progress with a beautiful kanban board</p>
+    
+    <button class="open-button" id="openBoard">
+      Open Kanban Board
+    </button>
+    
+    <div class="stats" id="taskStats">
+      Loading task statistics...
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
