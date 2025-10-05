@@ -1,6 +1,6 @@
-# Kanban Board - Thunderbird Extension
+# Kanban Board - Thunderbird Extension (JavaScript Version)
 
-A beautiful, fully-featured kanban board extension for Thunderbird that helps you organize tasks and track project progress.
+A beautiful, fully-featured kanban board extension for Thunderbird that helps you organize tasks and track project progress. This version has been converted from TypeScript to JavaScript for easier maintenance and broader compatibility.
 
 ## Features
 
@@ -73,11 +73,12 @@ A beautiful, fully-featured kanban board extension for Thunderbird that helps yo
 ## Technical Details
 
 ### Architecture
-- **Frontend**: React 18 with TypeScript
+- **Frontend**: React 18 with JavaScript (ES6+)
 - **Styling**: Tailwind CSS with custom design system
 - **Drag & Drop**: @dnd-kit library for smooth interactions
 - **Storage**: Thunderbird WebExtension storage API
 - **Build**: Vite for fast development and optimized builds
+- **Documentation**: JSDoc comments for type information
 
 ### File Structure
 ```
@@ -86,31 +87,42 @@ A beautiful, fully-featured kanban board extension for Thunderbird that helps yo
 ├── popup.html/js          # Toolbar popup
 ├── options.html/js        # Settings page
 ├── src/
-│   ├── App.tsx           # Main application
-│   ├── components/       # React components
-│   └── utils/            # Utility functions
+│   ├── App.jsx           # Main application
+│   ├── main.jsx          # Application entry point
+│   ├── components/       # React components (.jsx)
+│   └── utils/            # Utility functions (.js)
+├── vite.config.js        # Vite configuration
+├── eslint.config.js      # ESLint configuration
 └── dist/                 # Built files
 ```
 
-### Storage Schema
-```typescript
-interface Task {
-  id: string;
-  title: string;
-  description?: string;
-  status: 'todo' | 'in-progress' | 'review' | 'done';
-  priority: 'low' | 'medium' | 'high';
-  createdAt: Date;
-  updatedAt: Date;
-}
+### Data Schema
+```javascript
+// Task object structure
+const Task = {
+  id: string,           // Unique identifier
+  title: string,        // Task title
+  description?: string, // Optional description
+  status: string,       // 'todo' | 'in-progress' | 'review' | 'done'
+  priority: string,     // 'low' | 'medium' | 'high'
+  createdAt: Date,      // Creation timestamp
+  updatedAt: Date       // Last update timestamp
+};
 
-interface Column {
-  id: string;
-  title: string;
-  color: string;
-  bgColor: string;
-}
+// Column object structure
+const Column = {
+  id: string,      // Column identifier
+  title: string,   // Display name
+  color: string,   // Text color class
+  bgColor: string  // Background color class
+};
 ```
+
+### Type Safety & Documentation
+- **JSDoc Comments**: All functions and components are documented with JSDoc
+- **PropTypes**: Runtime type checking can be added if needed
+- **ESLint**: Configured for JavaScript best practices
+- **Runtime Validation**: Storage utilities include error handling
 
 ## Development
 
@@ -130,8 +142,8 @@ npm run dev
 # Build for production
 npm run build
 
-# Type checking
-npm run typecheck
+# Run linting
+npm run lint
 ```
 
 ### Building the Extension
@@ -140,16 +152,42 @@ npm run typecheck
 npm run build
 
 # Package as .xpi file
-# (Manual process - zip the built files with manifest.json)
+npm run package
 ```
+
+### Development Workflow
+1. Make changes to JavaScript/JSX files
+2. Run `npm run lint` to check code quality
+3. Run `npm run build` to build the extension
+4. Test in Thunderbird by loading the built extension
+
+## Migration from TypeScript
+
+This project was converted from TypeScript to JavaScript. Key changes include:
+
+### Removed Files
+- `tsconfig.json`, `tsconfig.app.json`, `tsconfig.node.json`
+- `src/vite-env.d.ts`
+- All `.ts` and `.tsx` files
+
+### Added Features
+- Comprehensive JSDoc documentation
+- Enhanced error handling in storage utilities
+- Improved ESLint configuration for JavaScript
+
+### Type Information
+- Type definitions are now in JSDoc comments
+- Runtime type checking can be added via PropTypes if needed
+- All interfaces and types are documented in comments
 
 ## Contributing
 
 1. Fork the repository
 2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+3. Make your changes (JavaScript/JSX only)
+4. Add JSDoc comments for new functions
+5. Test thoroughly
+6. Submit a pull request
 
 ## License
 
@@ -158,3 +196,25 @@ MIT License - see LICENSE file for details
 ## Support
 
 For issues and feature requests, please use the GitHub issue tracker.
+
+## JavaScript vs TypeScript Notes
+
+### Advantages of JavaScript Version
+- **Simpler Setup**: No TypeScript compilation step
+- **Faster Build**: Direct JavaScript execution
+- **Broader Compatibility**: Works in more environments
+- **Easier Debugging**: Direct source mapping
+- **Less Dependencies**: Fewer build tools required
+
+### Type Safety Considerations
+- **JSDoc**: Provides documentation and IDE support
+- **Runtime Validation**: Storage utilities include error handling
+- **ESLint**: Catches common JavaScript errors
+- **PropTypes**: Can be added for runtime type checking if needed
+
+### When to Add Runtime Type Checking
+Consider adding PropTypes or similar if you need:
+- Strict runtime validation
+- Better error messages for invalid data
+- Development-time type warnings
+- Integration with type-aware tools
